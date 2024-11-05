@@ -1,0 +1,26 @@
+﻿[
+  {
+    "ProductName": "SamsungS23",
+    "Category": "Mobile",
+    "Quantity": 25,
+    "IsAvailable": true
+  },
+  {
+    "ProductName": "Iphon6",
+    "Category": "Mobile",
+    "Quantity": 0,
+    "IsAvailable": false
+  },
+  {
+    "ProductName": "AsusA8",
+    "Category": "Laptop",
+    "Quantity": 12,
+    "IsAvailable": true
+  },
+  {
+    "ProductName": "Headphone",
+    "Category": "Headphone",
+    "Quantity": 20,
+    "IsAvailable": true
+  }
+]
