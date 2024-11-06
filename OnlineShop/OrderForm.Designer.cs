@@ -81,6 +81,7 @@
             this.resetButton.TabIndex = 9;
             this.resetButton.Text = "پاک کردن فرم";
             this.resetButton.UseVisualStyleBackColor = false;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // editButton
             // 
@@ -121,6 +122,7 @@
             this.addButton.TabIndex = 12;
             this.addButton.Text = "اضافه به لیست";
             this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // panel2
             // 

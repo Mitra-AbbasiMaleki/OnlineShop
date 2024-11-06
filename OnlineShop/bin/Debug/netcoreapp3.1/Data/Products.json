@@ -1,25 +1,25 @@
 ﻿[
   {
     "ProductName": "SamsungS23",
-    "Category": "Mobile",
+    "Category": "موبایل",
     "Quantity": 25,
     "IsAvailable": true
   },
   {
     "ProductName": "Iphon6",
-    "Category": "Mobile",
+    "Category": "موبایل",
     "Quantity": 0,
     "IsAvailable": false
   },
   {
     "ProductName": "AsusA8",
-    "Category": "Laptop",
+    "Category": "لپتاپ",
     "Quantity": 12,
     "IsAvailable": true
   },
   {
     "ProductName": "Headphone",
-    "Category": "Headphone",
+    "Category": "هدفون",
     "Quantity": 20,
     "IsAvailable": true
   }

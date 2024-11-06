@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
-namespace OnlineShop.Enum
+
+namespace OnlineShop.Enums
 {
    internal enum Status
     {
