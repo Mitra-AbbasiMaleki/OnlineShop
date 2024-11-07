@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace OnlineShop.Utility
 {
-    
-   public class Categories
+    [DebuggerDisplay("Category : {Name}")]
+    public class Categories
     {
-        int nextid = 1;
+        static int nextid = 1;
         public int Id { get; set; }
         public string Name { get; set; }
         public Categories(string name)

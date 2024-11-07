@@ -8,7 +8,7 @@ namespace OnlineShop.Utility
     {
         public string ProductName { get; set; }
         public int Quantity { get; set; }
-        public Categories Category { get; set; }
+        public string CategoryName { get; set; }
         public bool IsAvailable { get; set; }
     }
 }

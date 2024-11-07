@@ -1,27 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace OnlineShop.Utility
 {
+    [DebuggerDisplay("نام محصول : {ProductName},گروه : {Category},تعداد : {Quantity}.")]
     public class Product
     {
-        int nextid = 1;
+        static int nextid = 1;
         public int Id { get; set; }
         public string ProductName { get; set; }
+        public string CategoryName { get; set; }
         public int Quantity { get; set; }
-        public Categories Category { get; set; }
         public bool IsAvailable { get; set; }
         public Product()
         {
             Id = nextid++;
         }
-        public Product(string productName,int quantity,Categories category,bool? isAvailable=null)
+        public Product(string productName,int quantity,string categoryName,bool isAvailable)
         {
             ProductName = productName;
             Quantity = quantity;
-            IsAvailable = isAvailable??=true;
-            Category = category;
+            IsAvailable =isAvailable;
+            CategoryName = categoryName;
         }
     }
     

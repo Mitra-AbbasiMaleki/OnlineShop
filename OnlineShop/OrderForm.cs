@@ -26,16 +26,24 @@ namespace OnlineShop
         {
             categories = new List<Categories>();
             products = new List<Product>();
+
             string jsonDataCategoriesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Categories.json");
-            //string jsonDataProductFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Products.json");
             if (File.Exists(jsonDataCategoriesFilePath))
             {
-                string jsonDataStr = File.ReadAllText(jsonDataCategoriesFilePath);
-                categories = JsonConvert.DeserializeObject<List<Categories>>(jsonDataStr);
+                string jsonCategoryStr = File.ReadAllText(jsonDataCategoriesFilePath);
+                categories = JsonConvert.DeserializeObject<List<Categories>>(jsonCategoryStr);
             }
             categorycomboBox.DataSource = categories;
             categorycomboBox.DisplayMember = "Name";
             categorycomboBox.ValueMember = "Id";
+
+            string jsonDataProductFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Products.json");
+            if (File.Exists(jsonDataProductFilePath))
+            {
+                string jsonProductStr = File.ReadAllText(jsonDataProductFilePath);
+                products = JsonConvert.DeserializeObject<List<Product>>(jsonProductStr);
+            }
+            //dataGridView.DataSource = products; 
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -45,11 +53,12 @@ namespace OnlineShop
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            CheckDataInForm();
+            if (!CheckDataInForm())
+                return;
             AddProduct addProduct = new AddProduct
             {
                 ProductName = newProductName,
-                Category = selectedCategory,
+                CategoryName = selectedCategory.Name,
                 Quantity = newQuantity,
                 IsAvailable = selectedIsAvailable
             };
@@ -59,11 +68,12 @@ namespace OnlineShop
             
         private void AddProduct(AddProduct addProduct)
         {
-            Product newproduct = new Product(productName: addProduct.ProductName, quantity: addProduct.Quantity, category: addProduct.Category, isAvailable: addProduct.IsAvailable);
+            Product newproduct = new Product(productName: addProduct.ProductName, quantity: addProduct.Quantity, categoryName: addProduct.CategoryName, isAvailable: addProduct.IsAvailable);
             products.Add(newproduct);
+            Console.WriteLine(products);
             MessageBox.Show($"{addProduct.ProductName} add to list");
         }
-        private void CheckDataInForm()
+        private bool CheckDataInForm()
         {
             if (categorycomboBox.SelectedItem != null)
             {
@@ -72,23 +82,23 @@ namespace OnlineShop
             else
             {
                 MessageBox.Show("هیچ دسته‌بندی انتخاب نشده است.");
-                return;
+                return false;
             }
 
             if (string.IsNullOrEmpty(productNameTextBox.Text))
             {
                 MessageBox.Show("لطفا نام محصول را وارد کنید");
-                return;
+                return false;
             }
             else
             {
                 newProductName = productNameTextBox.Text.ToLower();
             }
 
-            if (!int.TryParse(quantityTextBox.Text, out newQuantity) && string.IsNullOrEmpty(quantityTextBox.Text))
+            if (!int.TryParse(quantityTextBox.Text, out newQuantity) || string.IsNullOrEmpty(quantityTextBox.Text))
             {
                     MessageBox.Show("تعداد وارد شده صحیح نمیباشد.");
-                return;
+                return false;
             }
            
             if (availableRadioButton.Checked)
@@ -102,8 +112,9 @@ namespace OnlineShop
             else
             {
                 MessageBox.Show("هیچ گزینه‌ای انتخاب نشده است");
-                return;
+                return false;
             }
+            return true;
         }
         private void resetForm()
         {
@@ -113,7 +124,6 @@ namespace OnlineShop
             availableRadioButton.Checked = false;
             unavailableRadioButton.Checked = false;
         }
-
 
         //private void FillComboBox()
         //{

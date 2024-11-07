@@ -64,7 +64,7 @@
             this.groupBox2.Controls.Add(this.categoryLabel);
             this.groupBox2.Controls.Add(this.productNameLabel);
             this.groupBox2.Controls.Add(this.categorycomboBox);
-            this.groupBox2.Location = new System.Drawing.Point(12, 14);
+            this.groupBox2.Location = new System.Drawing.Point(12, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.groupBox2.Size = new System.Drawing.Size(670, 259);
@@ -155,15 +155,6 @@
             this.availableRadioButton.TabStop = true;
             this.availableRadioButton.Text = "موجود";
             this.availableRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(92, 86);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 18);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label4";
             // 
             // statusLabel
             // 
