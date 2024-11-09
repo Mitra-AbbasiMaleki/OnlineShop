@@ -10,11 +10,11 @@ namespace OnlineShop.Utility
     {
         static int nextid = 1;
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
         public Categories(string name)
         {
             Id = nextid++;
-            Name = name;
+            CategoryName = name;
         }
     }
 }

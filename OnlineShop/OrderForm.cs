@@ -11,6 +11,9 @@ namespace OnlineShop
 {
     public partial class OrderForm : Form
     {
+        public delegate void LoadData();
+        public event LoadData LoadDataEvent;
+        public event LoadData ResetFormEvent;
         List<Categories> categories;
         List<Product> products;
         bool selectedIsAvailable = false;
@@ -20,6 +23,8 @@ namespace OnlineShop
         public OrderForm()
         {
             InitializeComponent();
+            LoadDataEvent += FillDataInDataGridView;
+            ResetFormEvent += ResetForm;
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
@@ -43,12 +48,17 @@ namespace OnlineShop
                 string jsonProductStr = File.ReadAllText(jsonDataProductFilePath);
                 products = JsonConvert.DeserializeObject<List<Product>>(jsonProductStr);
             }
-            //dataGridView.DataSource = products; 
+            LoadDataEvent.Invoke();
         }
-
+        private void FillDataInDataGridView()
+        {
+            //productDataGridView.DataSource = null;
+            //productDataGridView.DataSource = products;
+            //productDataGridView.Refresh();
+        }
         private void resetButton_Click(object sender, EventArgs e)
         {
-            resetForm();
+            ResetFormEvent.Invoke();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -63,7 +73,7 @@ namespace OnlineShop
                 IsAvailable = selectedIsAvailable
             };
             AddProduct(addProduct);
-            resetForm();
+            ResetFormEvent.Invoke();
         }
             
         private void AddProduct(AddProduct addProduct)
@@ -116,7 +126,7 @@ namespace OnlineShop
             }
             return true;
         }
-        private void resetForm()
+        private void ResetForm()
         {
             productNameTextBox.Text = string.Empty;
             quantityTextBox.Text = string.Empty;

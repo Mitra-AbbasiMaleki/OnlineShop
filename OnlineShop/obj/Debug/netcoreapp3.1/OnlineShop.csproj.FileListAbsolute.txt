@@ -16,3 +16,4 @@ C:\Users\HojjatShariffam\source\repos\OnlineShop\OnlineShop\obj\Debug\netcoreapp
 C:\Users\HojjatShariffam\source\repos\OnlineShop\OnlineShop\obj\Debug\netcoreapp3.1\OnlineShop.dll
 C:\Users\HojjatShariffam\source\repos\OnlineShop\OnlineShop\obj\Debug\netcoreapp3.1\OnlineShop.pdb
 C:\Users\HojjatShariffam\source\repos\OnlineShop\OnlineShop\obj\Debug\netcoreapp3.1\OnlineShop.genruntimeconfig.cache
+C:\Users\HojjatShariffam\source\repos\OnlineShop\OnlineShop\obj\Debug\netcoreapp3.1\OnlineShop.csprojAssemblyReference.cache
