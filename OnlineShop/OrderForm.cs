@@ -6,11 +6,13 @@ using System.ComponentModel;
 using System.IO;
 using Newtonsoft.Json;
 using OnlineShop.Utility;
+using OnlineShop.Businessees;
 
 namespace OnlineShop
 {
     public partial class OrderForm : Form
     {
+        private readonly ProductBusinesse _productBusinesse;
         public delegate void LoadData();
         public event LoadData LoadDataEvent;
         public event LoadData ResetFormEvent;
@@ -24,34 +26,38 @@ namespace OnlineShop
         {
             InitializeComponent();
             LoadDataEvent += FillDataInDataGridView;
+            _productBusinesse = new ProductBusinesse();
+            products = _productBusinesse.GetProducts();
             ResetFormEvent += ResetForm;
+            LoadDataEvent.Invoke();
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-            categories = new List<Categories>();
-            products = new List<Product>();
+            //categories = new List<Categories>();
+            //products = new List<Product>();
 
-            string jsonDataCategoriesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Categories.json");
-            if (File.Exists(jsonDataCategoriesFilePath))
-            {
-                string jsonCategoryStr = File.ReadAllText(jsonDataCategoriesFilePath);
-                categories = JsonConvert.DeserializeObject<List<Categories>>(jsonCategoryStr);
-            }
-            categorycomboBox.DataSource = categories;
-            categorycomboBox.DisplayMember = "Name";
-            categorycomboBox.ValueMember = "Id";
+            //string jsonDataCategoriesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Categories.json");
+            //if (File.Exists(jsonDataCategoriesFilePath))
+            //{
+            //    string jsonCategoryStr = File.ReadAllText(jsonDataCategoriesFilePath);
+            //    categories = JsonConvert.DeserializeObject<List<Categories>>(jsonCategoryStr);
+            //}
+            //categorycomboBox.DataSource = categories;
+            //categorycomboBox.DisplayMember = "Name";
+            //categorycomboBox.ValueMember = "Id";
 
-            string jsonDataProductFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Products.json");
-            if (File.Exists(jsonDataProductFilePath))
-            {
-                string jsonProductStr = File.ReadAllText(jsonDataProductFilePath);
-                products = JsonConvert.DeserializeObject<List<Product>>(jsonProductStr);
-            }
-            LoadDataEvent.Invoke();
+            //string jsonDataProductFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Products.json");
+            //if (File.Exists(jsonDataProductFilePath))
+            //{
+            //    string jsonProductStr = File.ReadAllText(jsonDataProductFilePath);
+            //    products = JsonConvert.DeserializeObject<List<Product>>(jsonProductStr);
+            //}
+            
         }
         private void FillDataInDataGridView()
         {
+            products = _productBusinesse.GetProducts();
             //productDataGridView.DataSource = null;
             //productDataGridView.DataSource = products;
             //productDataGridView.Refresh();
@@ -68,7 +74,7 @@ namespace OnlineShop
             AddProduct addProduct = new AddProduct
             {
                 ProductName = newProductName,
-                CategoryName = selectedCategory.Name,
+                CategoryId = selectedCategory.Id,
                 Quantity = newQuantity,
                 IsAvailable = selectedIsAvailable
             };
@@ -78,10 +84,12 @@ namespace OnlineShop
             
         private void AddProduct(AddProduct addProduct)
         {
-            Product newproduct = new Product(productName: addProduct.ProductName, quantity: addProduct.Quantity, categoryName: addProduct.CategoryName, isAvailable: addProduct.IsAvailable);
-            products.Add(newproduct);
+            Product newproduct = new Product(productName: addProduct.ProductName, quantity: addProduct.Quantity, categoryId: addProduct.CategoryId, isAvailable: addProduct.IsAvailable);
+            //products.Add(newproduct);
+            _productBusinesse.AddProduct(newproduct);
             Console.WriteLine(products);
             MessageBox.Show($"{addProduct.ProductName} add to list");
+            LoadDataEvent.Invoke();
         }
         private bool CheckDataInForm()
         {
