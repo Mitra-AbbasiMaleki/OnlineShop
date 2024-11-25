@@ -33,17 +33,16 @@
             this.resetButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
-            this.orderRegisterButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
+            this.productNameLabel = new System.Windows.Forms.Label();
+            this.productNameTextBox = new System.Windows.Forms.TextBox();
+            this.quantityLabel = new System.Windows.Forms.Label();
+            this.quantityTextBox = new System.Windows.Forms.TextBox();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.unavailableRadioButton = new System.Windows.Forms.RadioButton();
             this.availableRadioButton = new System.Windows.Forms.RadioButton();
-            this.statusLabel = new System.Windows.Forms.Label();
-            this.quantityTextBox = new System.Windows.Forms.TextBox();
-            this.productNameTextBox = new System.Windows.Forms.TextBox();
-            this.quantityLabel = new System.Windows.Forms.Label();
+            this.addButton = new System.Windows.Forms.Button();
             this.categoryLabel = new System.Windows.Forms.Label();
-            this.productNameLabel = new System.Windows.Forms.Label();
             this.categorycomboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             this.orderGroupBox.SuspendLayout();
@@ -54,9 +53,9 @@
             // 
             this.productDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.productDataGridView.ColumnHeadersHeight = 40;
-            this.productDataGridView.Location = new System.Drawing.Point(12, 268);
+            this.productDataGridView.Location = new System.Drawing.Point(12, 220);
             this.productDataGridView.Name = "productDataGridView";
-            this.productDataGridView.Size = new System.Drawing.Size(670, 220);
+            this.productDataGridView.Size = new System.Drawing.Size(670, 278);
             this.productDataGridView.TabIndex = 0;
             this.productDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGridView_CellClick);
             // 
@@ -65,20 +64,19 @@
             this.orderGroupBox.Controls.Add(this.resetButton);
             this.orderGroupBox.Controls.Add(this.editButton);
             this.orderGroupBox.Controls.Add(this.deleteButton);
-            this.orderGroupBox.Controls.Add(this.orderRegisterButton);
-            this.orderGroupBox.Controls.Add(this.addButton);
-            this.orderGroupBox.Controls.Add(this.panel2);
-            this.orderGroupBox.Controls.Add(this.statusLabel);
-            this.orderGroupBox.Controls.Add(this.quantityTextBox);
+            this.orderGroupBox.Controls.Add(this.productNameLabel);
             this.orderGroupBox.Controls.Add(this.productNameTextBox);
             this.orderGroupBox.Controls.Add(this.quantityLabel);
+            this.orderGroupBox.Controls.Add(this.quantityTextBox);
+            this.orderGroupBox.Controls.Add(this.statusLabel);
+            this.orderGroupBox.Controls.Add(this.panel2);
+            this.orderGroupBox.Controls.Add(this.addButton);
             this.orderGroupBox.Controls.Add(this.categoryLabel);
-            this.orderGroupBox.Controls.Add(this.productNameLabel);
             this.orderGroupBox.Controls.Add(this.categorycomboBox);
             this.orderGroupBox.Location = new System.Drawing.Point(12, 3);
             this.orderGroupBox.Name = "orderGroupBox";
             this.orderGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.orderGroupBox.Size = new System.Drawing.Size(670, 259);
+            this.orderGroupBox.Size = new System.Drawing.Size(670, 211);
             this.orderGroupBox.TabIndex = 0;
             this.orderGroupBox.TabStop = false;
             this.orderGroupBox.Text = "سفارش محصول";
@@ -86,9 +84,9 @@
             // resetButton
             // 
             this.resetButton.BackColor = System.Drawing.Color.Thistle;
-            this.resetButton.Location = new System.Drawing.Point(341, 133);
+            this.resetButton.Location = new System.Drawing.Point(12, 165);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(113, 41);
+            this.resetButton.Size = new System.Drawing.Size(242, 40);
             this.resetButton.TabIndex = 9;
             this.resetButton.Text = "پاک کردن فرم";
             this.resetButton.UseVisualStyleBackColor = false;
@@ -97,9 +95,9 @@
             // editButton
             // 
             this.editButton.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.editButton.Location = new System.Drawing.Point(460, 133);
+            this.editButton.Location = new System.Drawing.Point(12, 119);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(97, 41);
+            this.editButton.Size = new System.Drawing.Size(242, 40);
             this.editButton.TabIndex = 11;
             this.editButton.Text = "ویرایش";
             this.editButton.UseVisualStyleBackColor = false;
@@ -108,42 +106,62 @@
             // deleteButton
             // 
             this.deleteButton.BackColor = System.Drawing.Color.LightCoral;
-            this.deleteButton.Location = new System.Drawing.Point(563, 133);
+            this.deleteButton.Location = new System.Drawing.Point(12, 73);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(97, 41);
+            this.deleteButton.Size = new System.Drawing.Size(242, 40);
             this.deleteButton.TabIndex = 10;
             this.deleteButton.Text = "حذف";
             this.deleteButton.UseVisualStyleBackColor = false;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
-            // orderRegisterButton
+            // productNameLabel
             // 
-            this.orderRegisterButton.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.orderRegisterButton.Location = new System.Drawing.Point(21, 191);
-            this.orderRegisterButton.Name = "orderRegisterButton";
-            this.orderRegisterButton.Size = new System.Drawing.Size(202, 56);
-            this.orderRegisterButton.TabIndex = 13;
-            this.orderRegisterButton.Text = "ثبت سفارش";
-            this.orderRegisterButton.UseVisualStyleBackColor = false;
+            this.productNameLabel.AutoSize = true;
+            this.productNameLabel.Location = new System.Drawing.Point(549, 76);
+            this.productNameLabel.Name = "productNameLabel";
+            this.productNameLabel.Size = new System.Drawing.Size(88, 18);
+            this.productNameLabel.TabIndex = 0;
+            this.productNameLabel.Text = "نام محصول :";
             // 
-            // addButton
+            // productNameTextBox
             // 
-            this.addButton.BackColor = System.Drawing.Color.PowderBlue;
-            this.addButton.Location = new System.Drawing.Point(21, 133);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(202, 41);
-            this.addButton.TabIndex = 12;
-            this.addButton.Text = "اضافه به لیست";
-            this.addButton.UseVisualStyleBackColor = false;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.productNameTextBox.Location = new System.Drawing.Point(302, 73);
+            this.productNameTextBox.Name = "productNameTextBox";
+            this.productNameTextBox.Size = new System.Drawing.Size(241, 26);
+            this.productNameTextBox.TabIndex = 1;
+            // 
+            // quantityLabel
+            // 
+            this.quantityLabel.AutoSize = true;
+            this.quantityLabel.Location = new System.Drawing.Point(549, 122);
+            this.quantityLabel.Name = "quantityLabel";
+            this.quantityLabel.Size = new System.Drawing.Size(53, 18);
+            this.quantityLabel.TabIndex = 4;
+            this.quantityLabel.Text = "تعداد  :";
+            // 
+            // quantityTextBox
+            // 
+            this.quantityTextBox.Location = new System.Drawing.Point(302, 119);
+            this.quantityTextBox.Name = "quantityTextBox";
+            this.quantityTextBox.Size = new System.Drawing.Size(241, 26);
+            this.quantityTextBox.TabIndex = 5;
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Location = new System.Drawing.Point(549, 160);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(62, 18);
+            this.statusLabel.TabIndex = 8;
+            this.statusLabel.Text = "وضعیت :";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.unavailableRadioButton);
             this.panel2.Controls.Add(this.availableRadioButton);
-            this.panel2.Location = new System.Drawing.Point(21, 72);
+            this.panel2.Location = new System.Drawing.Point(302, 153);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(202, 32);
+            this.panel2.Size = new System.Drawing.Size(241, 32);
             this.panel2.TabIndex = 7;
             // 
             // unavailableRadioButton
@@ -168,37 +186,16 @@
             this.availableRadioButton.Text = "موجود";
             this.availableRadioButton.UseVisualStyleBackColor = true;
             // 
-            // statusLabel
+            // addButton
             // 
-            this.statusLabel.AutoSize = true;
-            this.statusLabel.Location = new System.Drawing.Point(229, 79);
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(62, 18);
-            this.statusLabel.TabIndex = 8;
-            this.statusLabel.Text = "وضعیت :";
-            // 
-            // quantityTextBox
-            // 
-            this.quantityTextBox.Location = new System.Drawing.Point(341, 76);
-            this.quantityTextBox.Name = "quantityTextBox";
-            this.quantityTextBox.Size = new System.Drawing.Size(202, 26);
-            this.quantityTextBox.TabIndex = 5;
-            // 
-            // productNameTextBox
-            // 
-            this.productNameTextBox.Location = new System.Drawing.Point(21, 33);
-            this.productNameTextBox.Name = "productNameTextBox";
-            this.productNameTextBox.Size = new System.Drawing.Size(202, 26);
-            this.productNameTextBox.TabIndex = 1;
-            // 
-            // quantityLabel
-            // 
-            this.quantityLabel.AutoSize = true;
-            this.quantityLabel.Location = new System.Drawing.Point(549, 79);
-            this.quantityLabel.Name = "quantityLabel";
-            this.quantityLabel.Size = new System.Drawing.Size(53, 18);
-            this.quantityLabel.TabIndex = 4;
-            this.quantityLabel.Text = "تعداد  :";
+            this.addButton.BackColor = System.Drawing.Color.PowderBlue;
+            this.addButton.Location = new System.Drawing.Point(12, 22);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(242, 45);
+            this.addButton.TabIndex = 12;
+            this.addButton.Text = "اضافه";
+            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // categoryLabel
             // 
@@ -209,26 +206,18 @@
             this.categoryLabel.TabIndex = 2;
             this.categoryLabel.Text = "گروه محصول :";
             // 
-            // productNameLabel
-            // 
-            this.productNameLabel.AutoSize = true;
-            this.productNameLabel.Location = new System.Drawing.Point(229, 36);
-            this.productNameLabel.Name = "productNameLabel";
-            this.productNameLabel.Size = new System.Drawing.Size(88, 18);
-            this.productNameLabel.TabIndex = 0;
-            this.productNameLabel.Text = "نام محصول :";
-            // 
             // categorycomboBox
             // 
             this.categorycomboBox.FormattingEnabled = true;
-            this.categorycomboBox.Location = new System.Drawing.Point(341, 33);
+            this.categorycomboBox.Location = new System.Drawing.Point(302, 33);
             this.categorycomboBox.Name = "categorycomboBox";
-            this.categorycomboBox.Size = new System.Drawing.Size(202, 26);
+            this.categorycomboBox.Size = new System.Drawing.Size(241, 26);
             this.categorycomboBox.TabIndex = 3;
+            this.categorycomboBox.SelectedIndexChanged += new System.EventHandler(this.categorycomboBox_SelectedIndexChanged);
             // 
             // OrderForm
             // 
-            this.ClientSize = new System.Drawing.Size(689, 499);
+            this.ClientSize = new System.Drawing.Size(689, 504);
             this.Controls.Add(this.orderGroupBox);
             this.Controls.Add(this.productDataGridView);
             this.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -260,7 +249,6 @@
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Button orderRegisterButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.DataGridView productDataGridView;
     }

@@ -92,7 +92,7 @@ namespace OnlineShop
         private void AddProduct(AddProduct addProduct)
         {
             Product newproduct = new Product(productName: addProduct.ProductName, quantity: addProduct.Quantity, categoryId: addProduct.CategoryId, isAvailable: addProduct.IsAvailable);
-            //products.Add(newproduct);
+            //products.HeaderText (newproduct);
             _productBusinesse.Add(newproduct);
             Console.WriteLine(products);
             // MessageBox.Show($"{addProduct.ProductName} add to list");
@@ -176,8 +176,6 @@ namespace OnlineShop
                 
             }
         }
-
-
         private void deleteButton_Click(object sender, EventArgs e)
         {
             if (SelectedProduct is null)
@@ -220,6 +218,11 @@ namespace OnlineShop
             products = _productBusinesse.GetAll();
             LoadDataEvent.Invoke(products);
             ResetForms();
+        }
+
+        private void categorycomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
