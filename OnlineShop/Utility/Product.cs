@@ -15,8 +15,9 @@ namespace OnlineShop.Utility
         public bool IsAvailable { get; set; }
         public Product()
         {
+
         }
-        public Product(string productName,int quantity,int categoryId,bool isAvailable)
+        public Product(string productName, int quantity, int categoryId, bool isAvailable)
         {
             ProductName = productName;
             Quantity = quantity;

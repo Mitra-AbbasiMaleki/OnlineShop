@@ -1,14 +1,18 @@
 ﻿[
   {
-    "Name": "الکترونیکی"
+    "Id": 1,
+    "CategoryName": "الکترونیکی"
   },
   {
-    "Name": "موبایل"
+    "Id": 2,
+    "CategoryName": "موبایل"
   },
   {
-    "Name": "لپتاپ"
+    "Id": 3,
+    "CategoryName": "لپتاپ"
   },
   {
-    "Name": "هدفون"
+    "Id": 4,
+    "CategoryName": "هدفون"
   }
 ]

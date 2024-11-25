@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.productDataGridView = new System.Windows.Forms.DataGridView();
+            this.orderGroupBox = new System.Windows.Forms.GroupBox();
             this.resetButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -37,7 +38,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.unavailableRadioButton = new System.Windows.Forms.RadioButton();
             this.availableRadioButton = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.productNameTextBox = new System.Windows.Forms.TextBox();
@@ -45,32 +45,43 @@
             this.categoryLabel = new System.Windows.Forms.Label();
             this.productNameLabel = new System.Windows.Forms.Label();
             this.categorycomboBox = new System.Windows.Forms.ComboBox();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
+            this.orderGroupBox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox2
+            // productDataGridView
             // 
-            this.groupBox2.Controls.Add(this.resetButton);
-            this.groupBox2.Controls.Add(this.editButton);
-            this.groupBox2.Controls.Add(this.deleteButton);
-            this.groupBox2.Controls.Add(this.orderRegisterButton);
-            this.groupBox2.Controls.Add(this.addButton);
-            this.groupBox2.Controls.Add(this.panel2);
-            this.groupBox2.Controls.Add(this.statusLabel);
-            this.groupBox2.Controls.Add(this.quantityTextBox);
-            this.groupBox2.Controls.Add(this.productNameTextBox);
-            this.groupBox2.Controls.Add(this.quantityLabel);
-            this.groupBox2.Controls.Add(this.categoryLabel);
-            this.groupBox2.Controls.Add(this.productNameLabel);
-            this.groupBox2.Controls.Add(this.categorycomboBox);
-            this.groupBox2.Location = new System.Drawing.Point(12, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.groupBox2.Size = new System.Drawing.Size(670, 259);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "سفارش محصول";
+            this.productDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.productDataGridView.ColumnHeadersHeight = 40;
+            this.productDataGridView.Location = new System.Drawing.Point(12, 268);
+            this.productDataGridView.Name = "productDataGridView";
+            this.productDataGridView.Size = new System.Drawing.Size(670, 220);
+            this.productDataGridView.TabIndex = 0;
+            this.productDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productDataGridView_CellClick);
+            // 
+            // orderGroupBox
+            // 
+            this.orderGroupBox.Controls.Add(this.resetButton);
+            this.orderGroupBox.Controls.Add(this.editButton);
+            this.orderGroupBox.Controls.Add(this.deleteButton);
+            this.orderGroupBox.Controls.Add(this.orderRegisterButton);
+            this.orderGroupBox.Controls.Add(this.addButton);
+            this.orderGroupBox.Controls.Add(this.panel2);
+            this.orderGroupBox.Controls.Add(this.statusLabel);
+            this.orderGroupBox.Controls.Add(this.quantityTextBox);
+            this.orderGroupBox.Controls.Add(this.productNameTextBox);
+            this.orderGroupBox.Controls.Add(this.quantityLabel);
+            this.orderGroupBox.Controls.Add(this.categoryLabel);
+            this.orderGroupBox.Controls.Add(this.productNameLabel);
+            this.orderGroupBox.Controls.Add(this.categorycomboBox);
+            this.orderGroupBox.Location = new System.Drawing.Point(12, 3);
+            this.orderGroupBox.Name = "orderGroupBox";
+            this.orderGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.orderGroupBox.Size = new System.Drawing.Size(670, 259);
+            this.orderGroupBox.TabIndex = 0;
+            this.orderGroupBox.TabStop = false;
+            this.orderGroupBox.Text = "سفارش محصول";
             // 
             // resetButton
             // 
@@ -92,6 +103,7 @@
             this.editButton.TabIndex = 11;
             this.editButton.Text = "ویرایش";
             this.editButton.UseVisualStyleBackColor = false;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // deleteButton
             // 
@@ -102,6 +114,7 @@
             this.deleteButton.TabIndex = 10;
             this.deleteButton.Text = "حذف";
             this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // orderRegisterButton
             // 
@@ -128,8 +141,7 @@
             // 
             this.panel2.Controls.Add(this.unavailableRadioButton);
             this.panel2.Controls.Add(this.availableRadioButton);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(21, 70);
+            this.panel2.Location = new System.Drawing.Point(21, 72);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(202, 32);
             this.panel2.TabIndex = 7;
@@ -137,7 +149,7 @@
             // unavailableRadioButton
             // 
             this.unavailableRadioButton.AutoSize = true;
-            this.unavailableRadioButton.Location = new System.Drawing.Point(16, 4);
+            this.unavailableRadioButton.Location = new System.Drawing.Point(17, 5);
             this.unavailableRadioButton.Name = "unavailableRadioButton";
             this.unavailableRadioButton.Size = new System.Drawing.Size(73, 22);
             this.unavailableRadioButton.TabIndex = 8;
@@ -217,14 +229,16 @@
             // OrderForm
             // 
             this.ClientSize = new System.Drawing.Size(689, 499);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.orderGroupBox);
+            this.Controls.Add(this.productDataGridView);
             this.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "OrderForm";
             this.RightToLeftLayout = true;
             this.Text = "فرم سفارش";
             this.Load += new System.EventHandler(this.OrderForm_Load);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
+            this.orderGroupBox.ResumeLayout(false);
+            this.orderGroupBox.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -232,11 +246,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox orderGroupBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RadioButton unavailableRadioButton;
         private System.Windows.Forms.RadioButton availableRadioButton;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.TextBox quantityTextBox;
         private System.Windows.Forms.TextBox productNameTextBox;
@@ -249,5 +262,6 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button orderRegisterButton;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.DataGridView productDataGridView;
     }
 }

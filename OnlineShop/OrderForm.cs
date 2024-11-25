@@ -7,19 +7,23 @@ using System.IO;
 using Newtonsoft.Json;
 using OnlineShop.Utility;
 using OnlineShop.Businessees;
+using System.Linq;
 
 namespace OnlineShop
 {
     public partial class OrderForm : Form
     {
         private readonly ProductBusinesse _productBusinesse;
-        public delegate void LoadData();
+        private readonly CategoryBusiness _categoryBusiness;
+        public delegate void LoadData(List<Product>products);
+        public delegate void ResetForm();
         public event LoadData LoadDataEvent;
-        public event LoadData ResetFormEvent;
+        public event ResetForm ResetFormEvent;
         List<Categories> categories;
         List<Product> products;
         bool selectedIsAvailable = false;
         String newProductName = string.Empty;
+        Product SelectedProduct;
         Categories selectedCategory;
         int newQuantity = 0;
         public OrderForm()
@@ -27,9 +31,11 @@ namespace OnlineShop
             InitializeComponent();
             LoadDataEvent += FillDataInDataGridView;
             _productBusinesse = new ProductBusinesse();
-            products = _productBusinesse.GetProducts();
-            ResetFormEvent += ResetForm;
-            LoadDataEvent.Invoke();
+            _categoryBusiness = new CategoryBusiness();
+            categories = _categoryBusiness.GetCategoriess();
+            ResetFormEvent += ResetForms;
+            products = _productBusinesse.GetAll();
+            LoadDataEvent.Invoke(products);
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
@@ -43,9 +49,9 @@ namespace OnlineShop
             //    string jsonCategoryStr = File.ReadAllText(jsonDataCategoriesFilePath);
             //    categories = JsonConvert.DeserializeObject<List<Categories>>(jsonCategoryStr);
             //}
-            //categorycomboBox.DataSource = categories;
-            //categorycomboBox.DisplayMember = "Name";
-            //categorycomboBox.ValueMember = "Id";
+            categorycomboBox.DataSource = categories;
+            categorycomboBox.DisplayMember = "Description";
+            categorycomboBox.ValueMember = "Id";
 
             //string jsonDataProductFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Products.json");
             //if (File.Exists(jsonDataProductFilePath))
@@ -53,14 +59,14 @@ namespace OnlineShop
             //    string jsonProductStr = File.ReadAllText(jsonDataProductFilePath);
             //    products = JsonConvert.DeserializeObject<List<Product>>(jsonProductStr);
             //}
-            
+
         }
-        private void FillDataInDataGridView()
+        private void FillDataInDataGridView(List<Product>products)
         {
-            products = _productBusinesse.GetProducts();
-            //productDataGridView.DataSource = null;
-            //productDataGridView.DataSource = products;
-            //productDataGridView.Refresh();
+            products = _productBusinesse.GetAll();
+            productDataGridView.DataSource = null;
+            productDataGridView.DataSource = products;
+            productDataGridView.Refresh();
         }
         private void resetButton_Click(object sender, EventArgs e)
         {
@@ -79,17 +85,19 @@ namespace OnlineShop
                 IsAvailable = selectedIsAvailable
             };
             AddProduct(addProduct);
-            ResetFormEvent.Invoke();
+            products = _productBusinesse.GetAll();
+            LoadDataEvent.Invoke(products);
         }
             
         private void AddProduct(AddProduct addProduct)
         {
             Product newproduct = new Product(productName: addProduct.ProductName, quantity: addProduct.Quantity, categoryId: addProduct.CategoryId, isAvailable: addProduct.IsAvailable);
             //products.Add(newproduct);
-            _productBusinesse.AddProduct(newproduct);
+            _productBusinesse.Add(newproduct);
             Console.WriteLine(products);
-            MessageBox.Show($"{addProduct.ProductName} add to list");
-            LoadDataEvent.Invoke();
+            // MessageBox.Show($"{addProduct.ProductName} add to list");
+            products = _productBusinesse.GetAll();
+            LoadDataEvent.Invoke(products);
         }
         private bool CheckDataInForm()
         {
@@ -125,7 +133,7 @@ namespace OnlineShop
             }
             else if (unavailableRadioButton.Checked)
             {
-                selectedIsAvailable = true;
+                selectedIsAvailable = false;
             }
             else
             {
@@ -134,7 +142,7 @@ namespace OnlineShop
             }
             return true;
         }
-        private void ResetForm()
+        private void ResetForms()
         {
             productNameTextBox.Text = string.Empty;
             quantityTextBox.Text = string.Empty;
@@ -142,23 +150,76 @@ namespace OnlineShop
             availableRadioButton.Checked = false;
             unavailableRadioButton.Checked = false;
         }
+        private void productDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex>=0)
+            {
+                var selectedRow = productDataGridView.Rows[e.RowIndex];
+                var id = (int)selectedRow.Cells["Id"].Value;
+                SelectedProduct = products.Where(p => p.Id == id).FirstOrDefault();
 
-        //private void FillComboBox()
-        //{
-        //    List<string> descriptions = new List<string>();
+                productNameTextBox.Text = SelectedProduct.ProductName;
+                quantityTextBox.Text = SelectedProduct.Quantity.ToString();
 
-        //    foreach (Status status in Enum.GetValues(typeof(Status)))
-        //    {
-        //        descriptions.Add(GetEnumDescription(status));
-        //    }
+                int selectedCategoryId = (int)selectedRow.Cells["CategoryId"].Value;
+                categorycomboBox.SelectedValue = selectedCategoryId;
+                selectedCategory = categorycomboBox.Items.Cast<Categories>().FirstOrDefault(c => c.Id == selectedCategoryId);
 
-        //    categorycomboBox.DataSource = descriptions;
-        //}
-        //public static string GetEnumDescription(Enum value)
-        //{
-        //    var field = value.GetType().GetField(value.ToString());
-        //    var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-        //    return attribute != null ? attribute.Description : value.ToString();
-        //}
+                if(SelectedProduct.IsAvailable)
+                {
+                    availableRadioButton.Checked = true;
+                }
+                else
+                {
+                    unavailableRadioButton.Checked = true ;
+                }
+                
+            }
+        }
+
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (SelectedProduct is null)
+            {
+                MessageBox.Show("شما محصولی را جهت به حذف انتخاب نکرده اید!");
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟","تایید حذف",
+                                               MessageBoxButtons.YesNo,
+                                               MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                _productBusinesse.Delete(Id: SelectedProduct.Id);
+                products = _productBusinesse.GetAll();
+                LoadDataEvent.Invoke(products);
+                ResetFormEvent.Invoke();
+            }
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            if (SelectedProduct is null)
+            {
+                MessageBox.Show("شما محصولی را جهت ویرایش اطلاعات انتخاب نکرده اید!");
+                return;
+            }
+
+            CheckDataInForm();
+            Product product = new Product()
+            {
+                ProductName = newProductName,
+                CategoryId = selectedCategory.Id,
+                Quantity = newQuantity,
+                IsAvailable = selectedIsAvailable,
+                Id = SelectedProduct.Id
+            };
+            _productBusinesse.Update(product);
+            products = _productBusinesse.GetAll();
+            LoadDataEvent.Invoke(products);
+            ResetForms();
+        }
     }
 }

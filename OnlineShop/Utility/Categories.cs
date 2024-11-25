@@ -11,9 +11,12 @@ namespace OnlineShop.Utility
         static int nextid = 1;
         public int Id { get; set; }
         public string CategoryName { get; set; }
+        public string Description { get; set; }
+        public Categories()
+        { }
+
         public Categories(string name)
         {
-            Id = nextid++;
             CategoryName = name;
         }
     }
